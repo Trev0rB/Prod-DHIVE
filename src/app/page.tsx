@@ -57,13 +57,29 @@ export default async function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 pt-14 sm:px-6">
         <div className="flex items-end justify-between">
-          <h2 className="font-display text-2xl font-bold">Trending right now</h2>
+          <h2 className="font-display text-2xl font-bold">{featured.length ? "Trending right now" : "Fresh on DHIVE"}</h2>
           <Link href="/browse" className="text-sm font-semibold text-brand hover:underline">
             See all →
           </Link>
         </div>
         <div className="mt-5">
-          <ProductGrid products={featured} />
+          {featured.length ? (
+            <ProductGrid products={featured} />
+          ) : (
+            <div className="hive-pattern rounded-xl border border-dashed border-line p-10 text-center">
+              <p className="font-display text-xl font-semibold">The hive is opening.</p>
+              <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
+                We&apos;re onboarding our first sellers now. Built an AI tool, template or course? List it early and keep
+                100% of every sale.
+              </p>
+              <Link
+                href="/sell"
+                className="mt-5 inline-block rounded-lg bg-honey px-5 py-2.5 text-sm font-semibold text-ink hover:bg-amber-400"
+              >
+                Become a founding seller
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

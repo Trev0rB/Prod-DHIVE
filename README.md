@@ -15,8 +15,8 @@ prototype), so it works out of the box.
 
 ### Connect Supabase
 
-1. Copy `.env.example` to `.env.local` and fill in your project URL and anon key.
-2. Apply the schema and seed:
+1. Copy `.env.example` to `.env.local` and fill in your project URL and publishable key (`sb_publishable_…`).
+2. Apply the schema and seed (production is already set up; this is for a fresh project):
    ```bash
    supabase link --project-ref <your-ref>
    supabase db push                 # runs supabase/migrations/*
@@ -50,6 +50,13 @@ src/lib/catalog.ts  catalog reads ('use cache', tagged "products"/"categories")
 src/lib/filter.ts   query parsing + in-memory filter/sort (demo mode)
 supabase/           migrations (schema + RLS) and seed data
 ```
+
+## Production
+
+- **Supabase:** project `Digital Hive Marketplace` (`vizdhfbdfzgozaokhzmo`, eu-west-1). Migrations 0001 + 0002 and the
+  category seed are applied. Security advisors are clean, and the RLS + column grants were checked by trying each escalation
+  as a signed-in and an anonymous user.
+- **Vercel:** project `prod-dhive`, deploys from `main`; PRs get preview URLs.
 
 ## Decisions so far
 

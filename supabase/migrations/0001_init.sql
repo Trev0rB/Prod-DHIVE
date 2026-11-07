@@ -111,7 +111,7 @@ create index orders_seller_idx on public.orders (seller_id, created_at desc);
 -- updated_at bookkeeping
 -- ---------------------------------------------------------------------------
 create function public.touch_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin
   new.updated_at = now();
   return new;
@@ -161,3 +161,31 @@ create policy "buyers read own orders" on public.orders
   for select using (auth.uid() = buyer_id);
 create policy "sellers read their sales" on public.orders
   for select using (auth.uid() = seller_id);
+
+-- ---------------------------------------------------------------------------
+-- Column-level privileges
+-- RLS decides which rows a client can touch; these grants decide which columns.
+-- Server-side code (service role) bypasses both for trusted writes.
+-- ---------------------------------------------------------------------------
+
+-- Profiles: users may only edit their display info. is_seller and the Paystack
+-- subaccount are set server-side during seller onboarding, never by the client.
+-- The subaccount code is not readable by clients at all.
+revoke select, insert, update, delete on public.profiles from anon, authenticated;
+grant select (id, display_name, avatar_url, is_seller, created_at) on public.profiles to anon, authenticated;
+grant update (display_name, avatar_url) on public.profiles to authenticated;
+
+-- Products: sellers manage listing content, but can't reassign ownership or give
+-- themselves a featured (paid) placement.
+-- The deliverable's storage path stays server-side (downloads go through signed URLs).
+revoke select, insert, update on public.products from anon, authenticated;
+grant select (id, seller_id, slug, title, summary, description, category_slug, price_cents, currency, icon, image_url,
+  integrations, status, featured_until, search, created_at, updated_at)
+  on public.products to anon, authenticated;
+grant insert (seller_id, slug, title, summary, description, category_slug, price_cents, icon, image_url, integrations, file_path, status)
+  on public.products to authenticated;
+grant update (slug, title, summary, description, category_slug, price_cents, icon, image_url, integrations, file_path, status)
+  on public.products to authenticated;
+
+-- Categories and orders are read-only for clients.
+revoke insert, update, delete on public.categories, public.orders from anon, authenticated;
