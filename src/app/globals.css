@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/dm-sans";
+
+/* DHIVE brand tokens, carried over from the original prototype. */
+@theme {
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0f172a;
+  --color-ink-soft: #475569;
+  --color-line: #e2e8f0;
+  --color-paper: #ffffff;
+  --color-wash: #f8fafc;
+
+  --color-brand: #2563eb;
+  --color-brand-dark: #1d4ed8;
+  --color-brand-wash: #eff6ff;
+  --color-honey: #f59e0b;
+  --color-honey-wash: #fffbeb;
+  --color-ok: #10b981;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Honeycomb texture used behind the hero. */
+.hive-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 56 98'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 32L0 82V66l28 16 28-16v16L28 98z' fill='none' stroke='%232563eb' stroke-opacity='.08'/%3E%3C/svg%3E");
+}
