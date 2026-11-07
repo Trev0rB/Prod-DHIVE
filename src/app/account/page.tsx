@@ -55,7 +55,7 @@ async function AccountBody() {
               ? "Manage your listings and see your sales."
               : "List your AI tools and keep 100% of every sale."}
           </p>
-          <Link href="/sell" className="mt-4 inline-block text-sm font-semibold text-amber-800 hover:underline">
+          <Link href={user.isSeller ? "/dashboard" : "/sell"} className="mt-4 inline-block text-sm font-semibold text-amber-800 hover:underline">
             {user.isSeller ? "Go to dashboard →" : "Become a seller →"}
           </Link>
         </section>

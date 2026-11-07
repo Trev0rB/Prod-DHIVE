@@ -14,12 +14,12 @@ export function SiteHeader() {
         <div className="hidden flex-1 sm:block">
           <SearchBox />
         </div>
-        <nav className="ml-auto flex items-center gap-1 text-sm font-medium sm:ml-0">
+        <nav className="ml-auto flex items-center gap-1 text-sm font-medium whitespace-nowrap sm:ml-0">
           <Link href="/browse" className="rounded-md px-3 py-2 text-ink-soft hover:bg-wash hover:text-ink">
             Browse
           </Link>
           <Link href="/sell" className="rounded-md bg-ink px-3 py-2 text-paper hover:bg-brand">
-            Sell on DHIVE
+            Sell<span className="hidden sm:inline"> on DHIVE</span>
           </Link>
           <Suspense fallback={<AccountNavFallback />}>
             <AccountNav />
