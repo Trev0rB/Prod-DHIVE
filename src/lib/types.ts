@@ -17,6 +17,8 @@ export type Product = {
   imageUrl: string | null;
   integrations: string[];
   sellerName: string;
+  /** Whether the seller can receive Paystack payouts yet (paid listings can only be bought if so). */
+  sellerPayoutsReady: boolean;
   featured: boolean;
   createdAt: string;
 };

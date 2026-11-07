@@ -74,3 +74,11 @@ describe("demo catalog", () => {
     expect(new Set(DEMO_PRODUCTS.map((p) => p.slug)).size).toBe(DEMO_PRODUCTS.length);
   });
 });
+
+describe("formatAmount", () => {
+  it("shows cents in the en-ZA style", async () => {
+    const { formatAmount } = await import("./format");
+    expect(formatAmount(258_745)).toMatch(/^R\s?2[\s ]587[,.]45$/);
+    expect(formatAmount(1_841)).toMatch(/^R\s?18[,.]41$/);
+  });
+});

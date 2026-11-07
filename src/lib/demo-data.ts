@@ -30,6 +30,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Web Form",
       "Dashboard"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "DHIVE",
     "featured": false,
     "createdAt": "2026-10-01T08:00:00.000Z"
@@ -50,6 +51,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Telegram",
       "Web Chat"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "DHIVE",
     "featured": true,
     "createdAt": "2026-09-30T08:00:00.000Z"
@@ -70,6 +72,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Slack",
       "WhatsApp"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "DHIVE",
     "featured": true,
     "createdAt": "2026-09-29T08:00:00.000Z"
@@ -90,6 +93,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Indeed",
       "Email"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "JobHelper",
     "featured": true,
     "createdAt": "2026-09-28T08:00:00.000Z"
@@ -110,6 +114,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Medium",
       "Email"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "WritePro",
     "featured": true,
     "createdAt": "2026-09-27T08:00:00.000Z"
@@ -130,6 +135,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "ActiveCampaign",
       "ConvertKit"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "EmailPro",
     "featured": false,
     "createdAt": "2026-09-26T08:00:00.000Z"
@@ -150,6 +156,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "HubSpot",
       "Pipedrive"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "SalesAI",
     "featured": false,
     "createdAt": "2026-09-25T08:00:00.000Z"
@@ -170,6 +177,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Teams",
       "Email"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "ProductivityTools",
     "featured": false,
     "createdAt": "2026-09-24T08:00:00.000Z"
@@ -190,6 +198,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Email",
       "PDF Export"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "CareerBoost",
     "featured": false,
     "createdAt": "2026-09-23T08:00:00.000Z"
@@ -211,6 +220,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Email",
       "Surveys"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "SentimentAI",
     "featured": false,
     "createdAt": "2026-09-22T08:00:00.000Z"
@@ -231,6 +241,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Mailchimp",
       "ConvertKit"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "TemplateHub",
     "featured": false,
     "createdAt": "2026-09-21T08:00:00.000Z"
@@ -250,6 +261,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Excel",
       "Google Sheets"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "ExcelPro",
     "featured": false,
     "createdAt": "2026-09-20T08:00:00.000Z"
@@ -269,6 +281,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Udemy",
       "Self-Hosted"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "CodeMaster",
     "featured": false,
     "createdAt": "2026-09-19T08:00:00.000Z"
@@ -288,6 +301,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "PDF",
       "Email"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "MarketingGuru",
     "featured": false,
     "createdAt": "2026-09-18T08:00:00.000Z"
@@ -307,6 +321,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "WordPress",
       "Google Search Console"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "PluginCentral",
     "featured": false,
     "createdAt": "2026-09-17T08:00:00.000Z"
@@ -328,6 +343,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "LinkedIn",
       "Facebook"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "SocialManager",
     "featured": false,
     "createdAt": "2026-09-16T08:00:00.000Z"
@@ -350,6 +366,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Email",
       "Calendar"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "EnterpriseAI",
     "featured": false,
     "createdAt": "2026-09-15T08:00:00.000Z"
@@ -370,6 +387,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Custom Integration",
       "API"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "DHIVE",
     "featured": false,
     "createdAt": "2026-09-14T08:00:00.000Z"
@@ -392,6 +410,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "Power BI",
       "Tableau"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "DataDriven",
     "featured": false,
     "createdAt": "2026-09-13T08:00:00.000Z"
@@ -413,6 +432,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "API",
       "Machine Learning"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "DHIVE",
     "featured": false,
     "createdAt": "2026-09-12T08:00:00.000Z"
@@ -435,6 +455,7 @@ export const DEMO_PRODUCTS: Product[] = [
       "API",
       "Custom Reports"
     ],
+    "sellerPayoutsReady": true,
     "sellerName": "EnterpriseAI",
     "featured": false,
     "createdAt": "2026-09-11T08:00:00.000Z"

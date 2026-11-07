@@ -9,6 +9,7 @@ export type CurrentUser = {
   email: string;
   displayName: string;
   isSeller: boolean;
+  payoutsReady: boolean;
 };
 
 /**
@@ -24,7 +25,7 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("display_name, is_seller")
+    .select("display_name, is_seller, payouts_ready")
     .eq("id", claims.sub)
     .maybeSingle();
 
@@ -34,6 +35,7 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
     email,
     displayName: profile?.display_name || email.split("@")[0] || "there",
     isSeller: profile?.is_seller ?? false,
+    payoutsReady: profile?.payouts_ready ?? false,
   };
 });
 
