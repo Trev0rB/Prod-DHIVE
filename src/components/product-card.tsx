@@ -9,9 +9,14 @@ export function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col rounded-xl border border-line bg-paper p-5 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lg hover:shadow-brand/5"
     >
       <div className="flex items-start justify-between gap-3">
-        <span className="grid size-12 place-items-center rounded-lg bg-brand-wash text-2xl" aria-hidden="true">
-          {product.icon}
-        </span>
+        {product.imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element -- seller uploads from Supabase Storage
+          <img src={product.imageUrl} alt="" loading="lazy" className="size-12 rounded-lg object-cover" />
+        ) : (
+          <span className="grid size-12 place-items-center rounded-lg bg-brand-wash text-2xl" aria-hidden="true">
+            {product.icon}
+          </span>
+        )}
         {product.featured && (
           <span className="rounded-full bg-honey-wash px-2 py-0.5 text-xs font-semibold text-amber-700">Featured</span>
         )}

@@ -66,6 +66,10 @@ supabase/           migrations (schema + RLS) and seed data
 - **Zero platform fee.** Sellers get 100% of the price via Paystack subaccounts. DHIVE earns from featured
   listings (`products.featured_until`) and Pro subscriptions.
 - **Prices in cents** (`price_cents`), matching what Paystack expects.
+- **Becoming a seller** goes through the `become_seller()` database function; clients can't set `is_seller` directly.
+- **Files** live in Supabase Storage under `<user id>/…`. Deliverables are private: only the seller and buyers with a
+  paid order can read them (`can_download()`). Uploads go browser → Storage directly, because Vercel caps request bodies at ~4.5 MB.
+  The two definer functions are flagged by the Supabase advisor as callable by signed-in users. That's intended: both only act on the caller.
 - **Writes to orders happen server-side only** (service role from checkout + webhook). RLS gives clients read
   access to their own orders/sales and nothing else.
 
@@ -73,7 +77,7 @@ supabase/           migrations (schema + RLS) and seed data
 
 - [x] **Cycle 1:** scaffold, Supabase schema + RLS, home / browse (search, category, price, sort) / listing pages, demo catalog, tests
 - [x] **Cycle 2:** auth: magic-link sign-in, session refresh in `proxy.ts`, `/account` with profile edit + sign out
-- [ ] **Cycle 3:** seller onboarding + dashboard: become a seller, create/edit/publish listings, upload deliverables to private storage
+- [x] **Cycle 3:** seller onboarding (`/sell`), `/dashboard`, create/edit/publish/archive listings, direct-to-storage uploads (private deliverables, public cover images)
 - [ ] **Cycle 4:** Paystack checkout: initialize transaction server-side, verify via webhook, create order, deliver file via signed URL
 - [ ] **Cycle 5:** seller payouts: Paystack subaccount creation during onboarding, split so 100% goes to seller
 - [ ] **Cycle 6:** buyer library (purchases), seller sales view, email receipts
