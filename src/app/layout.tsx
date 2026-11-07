@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   },
   description:
     "Buy and sell AI tools, automations, templates and courses. Zero platform fees: sellers keep every rand.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://dhive.co.za"),
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
