@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { AccountNav, AccountNavFallback } from "./account-nav";
 import { SearchBox } from "./search-box";
 
 export function SiteHeader() {
@@ -19,6 +21,9 @@ export function SiteHeader() {
           <Link href="/sell" className="rounded-md bg-ink px-3 py-2 text-paper hover:bg-brand">
             Sell on DHIVE
           </Link>
+          <Suspense fallback={<AccountNavFallback />}>
+            <AccountNav />
+          </Suspense>
         </nav>
       </div>
     </header>

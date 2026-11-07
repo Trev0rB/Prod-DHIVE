@@ -24,6 +24,13 @@ prototype), so it works out of the box.
    ```
    Or paste both files into the Supabase SQL editor, in that order.
 
+### Auth settings (Supabase dashboard → Authentication)
+
+- **URL Configuration:** set Site URL to `https://dhive.co.za` and add these Redirect URLs:
+  `https://dhive.co.za/auth/confirm`, `https://*-trev0rbs-projects.vercel.app/auth/confirm` (previews), `http://localhost:3000/auth/confirm`.
+- **Email template (Magic Link), optional:** so links work when opened on a different device, change the link to
+  `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email`. The default `?code=` link also works, as long as it's opened in the same browser.
+
 ## Scripts
 
 | Command | What it does |
@@ -56,7 +63,7 @@ supabase/           migrations (schema + RLS) and seed data
 ## Roadmap (dev loop cycles)
 
 - [x] **Cycle 1:** scaffold, Supabase schema + RLS, home / browse (search, category, price, sort) / listing pages, demo catalog, tests
-- [ ] **Cycle 2:** auth: Supabase email sign-in, session handling in `proxy.ts`, account menu
+- [x] **Cycle 2:** auth: magic-link sign-in, session refresh in `proxy.ts`, `/account` with profile edit + sign out
 - [ ] **Cycle 3:** seller onboarding + dashboard: become a seller, create/edit/publish listings, upload deliverables to private storage
 - [ ] **Cycle 4:** Paystack checkout: initialize transaction server-side, verify via webhook, create order, deliver file via signed URL
 - [ ] **Cycle 5:** seller payouts: Paystack subaccount creation during onboarding, split so 100% goes to seller
