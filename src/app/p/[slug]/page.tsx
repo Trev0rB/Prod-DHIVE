@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ProductGrid } from "@/components/product-card";
 import { getCategories, getProduct, listProducts } from "@/lib/catalog";
-import { formatPrice } from "@/lib/format";
+import { BuyBox } from "@/components/buy-box";
+import { paymentsEnabled } from "@/lib/orders";
 
 type Params = Promise<{ slug: string }>;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const product = await getProduct((await params).slug);
@@ -14,16 +16,17 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { title: product.title, description: product.summary };
 }
 
-export default function ProductPage({ params }: { params: Params }) {
+export default function ProductPage({ params, searchParams }: { params: Params; searchParams: SearchParams }) {
   return (
     <Suspense fallback={<div className="mx-auto h-[60vh] max-w-6xl animate-pulse px-4 py-10 sm:px-6" />}>
-      <ProductDetail params={params} />
+      <ProductDetail params={params} searchParams={searchParams} />
     </Suspense>
   );
 }
 
-async function ProductDetail({ params }: { params: Params }) {
-  const { slug } = await params;
+async function ProductDetail({ params, searchParams }: { params: Params; searchParams: SearchParams }) {
+  const [{ slug }, query] = await Promise.all([params, searchParams]);
+  const checkoutError = typeof query.checkout === "string" ? query.checkout : undefined;
   const product = await getProduct(slug);
   if (!product) notFound();
 
@@ -78,22 +81,7 @@ async function ProductDetail({ params }: { params: Params }) {
           )}
         </article>
 
-        <aside className="h-fit rounded-xl border border-line p-6 lg:sticky lg:top-24">
-          <p className="font-display text-4xl font-bold">{formatPrice(product.priceCents)}</p>
-          <p className="mt-1 text-sm text-ink-soft">Once-off · instant digital delivery</p>
-          {/* Paystack checkout lands in a later cycle. */}
-          <button
-            type="button"
-            disabled
-            className="mt-6 w-full cursor-not-allowed rounded-lg bg-brand/60 px-5 py-3 text-sm font-semibold text-paper"
-          >
-            {product.priceCents === 0 ? "Get it free" : "Buy now"} · coming soon
-          </button>
-          <ul className="mt-6 space-y-2 text-sm text-ink-soft">
-            <li>✓ Secure checkout with Paystack</li>
-            <li>✓ 100% of your payment goes to the seller</li>
-          </ul>
-        </aside>
+        <BuyBox product={product} checkoutError={checkoutError} paymentsLive={paymentsEnabled()} />
       </div>
 
       {more.length > 0 && (

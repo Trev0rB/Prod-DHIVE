@@ -21,11 +21,11 @@ type ProductRow = {
   integrations: string[];
   featured_until: string | null;
   created_at: string;
-  seller: { display_name: string } | null;
+  seller: { display_name: string; payouts_ready: boolean } | null;
 };
 
 const PRODUCT_COLUMNS =
-  "id, slug, title, summary, description, category_slug, price_cents, currency, icon, image_url, integrations, featured_until, created_at, seller:profiles!products_seller_id_fkey(display_name)";
+  "id, slug, title, summary, description, category_slug, price_cents, currency, icon, image_url, integrations, featured_until, created_at, seller:profiles!products_seller_id_fkey(display_name, payouts_ready)";
 
 function toProduct(row: ProductRow): Product {
   return {
@@ -41,6 +41,7 @@ function toProduct(row: ProductRow): Product {
     imageUrl: row.image_url,
     integrations: row.integrations ?? [],
     sellerName: row.seller?.display_name || "DHIVE seller",
+    sellerPayoutsReady: row.seller?.payouts_ready ?? false,
     featured: row.featured_until !== null && new Date(row.featured_until) > new Date(),
     createdAt: row.created_at,
   };

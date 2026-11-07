@@ -16,6 +16,7 @@ const NOTICES: Record<string, string> = {
   draft: "Saved as a draft. It isn't visible to buyers yet.",
   archived: "Listing archived. It's hidden from buyers.",
   deleted: "Draft deleted.",
+  payouts: "Payout account saved. Your paid listings can now be bought.",
 };
 
 const BADGE: Record<ListingStatus, string> = {
@@ -57,13 +58,31 @@ async function Dashboard({ searchParams }: { searchParams: SearchParams }) {
             {listings.length} total · {live} live
           </p>
         </div>
-        <Link
-          href="/dashboard/listings/new"
-          className="rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-paper hover:bg-brand-dark"
-        >
-          + New listing
-        </Link>
+        <div className="flex gap-2">
+          <Link
+            href="/dashboard/payouts"
+            className="rounded-lg border border-line px-4 py-3 text-sm font-semibold hover:border-ink"
+          >
+            Payouts
+          </Link>
+          <Link
+            href="/dashboard/listings/new"
+            className="rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-paper hover:bg-brand-dark"
+          >
+            + New listing
+          </Link>
+        </div>
       </div>
+
+      {!user.payoutsReady && listings.some((l) => l.priceCents > 0) && (
+        <p className="mt-6 rounded-lg bg-honey-wash p-3 text-sm text-amber-900">
+          Buyers can&apos;t pay for your paid listings until you{" "}
+          <Link href="/dashboard/payouts" className="font-semibold underline">
+            add a payout account
+          </Link>
+          .
+        </p>
+      )}
 
       {(notice || error) && (
         <p

@@ -78,12 +78,28 @@ supabase/           migrations (schema + RLS) and seed data
 - [x] **Cycle 1:** scaffold, Supabase schema + RLS, home / browse (search, category, price, sort) / listing pages, demo catalog, tests
 - [x] **Cycle 2:** auth: magic-link sign-in, session refresh in `proxy.ts`, `/account` with profile edit + sign out
 - [x] **Cycle 3:** seller onboarding (`/sell`), `/dashboard`, create/edit/publish/archive listings, direct-to-storage uploads (private deliverables, public cover images)
-- [ ] **Cycle 4:** Paystack checkout: initialize transaction server-side, verify via webhook, create order, deliver file via signed URL
-- [ ] **Cycle 5:** seller payouts: Paystack subaccount creation during onboarding, split so 100% goes to seller
-- [ ] **Cycle 6:** buyer library (purchases), seller sales view, email receipts
+- [x] **Cycle 4:** Paystack checkout (buyer pays the card fee), webhook + callback verification, seller payout accounts (Paystack subaccounts), free claims, buyer library with signed downloads
+- [ ] **Cycle 5:** seller sales view, email receipts, refunds/disputes handling
+- [ ] **Cycle 6:** move dhive.co.za to this project, legal pages (terms, privacy, seller terms), launch checklist
 - [ ] Later: featured listings (paid), Pro subscriptions, messaging, AI builder portal (Claude API)
+
+## Payments setup
+
+1. Add to Vercel (Production + Preview), **server-only**: `PAYSTACK_SECRET_KEY` and `SUPABASE_SECRET_KEY` (see `.env.example`).
+   Until both exist, paid checkout and payout setup stay switched off; free listings and downloads still work.
+2. In Paystack → Settings → API Keys & Webhooks, set the webhook URL to `https://prod-dhive.vercel.app/api/paystack/webhook`
+   (test and live are configured separately).
+3. Each seller adds a payout account at `/dashboard/payouts` (creates a Paystack subaccount with a 0% platform share).
+
+**How the money flows:** the buyer pays price + Paystack's fee (2.9% + R1, excl. 15% VAT; R1 waived under R10; see
+`src/lib/fees.ts`). The full charge goes to the seller's subaccount with `bearer: "subaccount"`, so Paystack takes its fee
+there and the seller nets exactly the listing price. DHIVE receives nothing from sales. International cards cost a little
+more (3.1% + R1), so on those the seller nets a few rand less.
+
+**Trust model:** orders are only marked paid by the server after re-verifying the reference with Paystack and checking
+status, currency, reference and the exact amount. The webhook signature (HMAC-SHA512) is checked first. Clients can't
+write orders at all.
 
 ### Open questions
 
-- Who absorbs Paystack's transaction fee: the seller (`bearer: subaccount`) or DHIVE? This decides the payout split config in cycle 5.
-- Should free listings require sign-in to download?
+- Should free listings require sign-in to download? (Currently yes, so they land in the buyer's library.)

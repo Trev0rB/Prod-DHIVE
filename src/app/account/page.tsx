@@ -43,9 +43,9 @@ async function AccountBody() {
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <section className="rounded-xl border border-line p-6">
           <h2 className="font-display text-lg font-semibold">Purchases</h2>
-          <p className="mt-1 text-sm text-ink-soft">Everything you buy on DHIVE will be here to download.</p>
-          <Link href="/browse" className="mt-4 inline-block text-sm font-semibold text-brand hover:underline">
-            Browse the marketplace →
+          <p className="mt-1 text-sm text-ink-soft">Everything you buy or claim on DHIVE, ready to download.</p>
+          <Link href="/account/purchases" className="mt-4 inline-block text-sm font-semibold text-brand hover:underline">
+            Open your library →
           </Link>
         </section>
         <section className="rounded-xl border border-line bg-honey-wash/60 p-6">
