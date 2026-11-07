@@ -14,7 +14,13 @@ export function BecomeSellerForm() {
       </ul>
       <label className="flex items-start gap-3 text-sm">
         <input type="checkbox" name="terms" required className="mt-0.5 size-4 accent-[var(--color-brand)]" />
-        <span>I agree to the seller terms above.</span>
+        <span>
+          I agree to the{" "}
+          <a href="/seller-terms" target="_blank" className="font-semibold underline">
+            seller terms
+          </a>
+          .
+        </span>
       </label>
       {state.status === "error" && (
         <p role="alert" className="text-sm text-red-600">

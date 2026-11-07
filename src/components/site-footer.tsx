@@ -7,12 +7,18 @@ export function SiteFooter() {
         <p>
           <span className="font-display font-semibold text-ink">DHIVE</span> by BoschTech · Built in South Africa
         </p>
-        <nav className="flex gap-5">
+        <nav className="flex flex-wrap gap-5">
           <Link href="/browse" className="hover:text-ink">
             Browse
           </Link>
           <Link href="/sell" className="hover:text-ink">
             Sell
+          </Link>
+          <Link href="/terms" className="hover:text-ink">
+            Terms
+          </Link>
+          <Link href="/privacy" className="hover:text-ink">
+            Privacy
           </Link>
         </nav>
       </div>

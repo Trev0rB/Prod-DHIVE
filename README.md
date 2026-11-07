@@ -79,8 +79,8 @@ supabase/           migrations (schema + RLS) and seed data
 - [x] **Cycle 2:** auth: magic-link sign-in, session refresh in `proxy.ts`, `/account` with profile edit + sign out
 - [x] **Cycle 3:** seller onboarding (`/sell`), `/dashboard`, create/edit/publish/archive listings, direct-to-storage uploads (private deliverables, public cover images)
 - [x] **Cycle 4:** Paystack checkout (buyer pays the card fee), webhook + callback verification, seller payout accounts (Paystack subaccounts), free claims, buyer library with signed downloads
-- [ ] **Cycle 5:** seller sales view, email receipts, refunds/disputes handling
-- [ ] **Cycle 6:** move dhive.co.za to this project, legal pages (terms, privacy, seller terms), launch checklist
+- [x] **Cycle 5:** seller sales page, legal pages (terms, privacy/POPIA, seller terms: drafts, need legal review), sitemap, robots, social share image
+- [ ] **Cycle 6:** live Paystack test purchase (needs keys), email receipts, move dhive.co.za, launch checklist
 - [ ] Later: featured listings (paid), Pro subscriptions, messaging, AI builder portal (Claude API)
 
 ## Payments setup
@@ -99,6 +99,11 @@ more (3.1% + R1), so on those the seller nets a few rand less.
 **Trust model:** orders are only marked paid by the server after re-verifying the reference with Paystack and checking
 status, currency, reference and the exact amount. The webhook signature (HMAC-SHA512) is checked first. Clients can't
 write orders at all.
+
+### Before launch
+
+- Have the legal pages reviewed (`src/app/terms`, `privacy`, `seller-terms`). They describe how DHIVE actually works but aren't legal advice.
+- Create the support mailbox (`NEXT_PUBLIC_SUPPORT_EMAIL`, default `support@dhive.co.za`); it's named as the POPIA contact.
 
 ### Open questions
 

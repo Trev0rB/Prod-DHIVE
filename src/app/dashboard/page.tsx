@@ -60,6 +60,12 @@ async function Dashboard({ searchParams }: { searchParams: SearchParams }) {
         </div>
         <div className="flex gap-2">
           <Link
+            href="/dashboard/sales"
+            className="rounded-lg border border-line px-4 py-3 text-sm font-semibold hover:border-ink"
+          >
+            Sales
+          </Link>
+          <Link
             href="/dashboard/payouts"
             className="rounded-lg border border-line px-4 py-3 text-sm font-semibold hover:border-ink"
           >
